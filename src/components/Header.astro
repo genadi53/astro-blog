@@ -2,14 +2,22 @@
 import HeaderLink from "./HeaderLink.astro";
 import { ThemeToggle } from "./ui/theme-toggle";
 import GithubLink from "./GithubLink.astro";
+import MobileNav from "./MobileNav";
+import { ReceiptText } from "lucide-react";
 
-const linkStyles = "py-4 px-2 border-b-2 border-b-transparent";
+const linkStyles =
+  "py-4 px-2 border-b-2 border-b-transparent transition-colors hover:text-orange-500";
+const linkStylesMobile =
+  "flex w-full cursor-pointer items-center rounded-md p-2 font-medium text-accent-foreground hover:text-orange-500";
 ---
 
 <header
-  class="m-0 py-0 px-4 bg-white dark:bg-background dark:border-b-2 dark:border-orange-500 shadow-md text-base"
+  class:list={[
+    "flex items-center justify-between gap-10 m-0 px-4 py-4 bg-white dark:bg-background/80 dark:border-b-2 dark:border-orange-500 shadow-md text-base",
+    "sm:block sm:py-0 sm:px-4",
+  ]}
 >
-  <nav class="flex items-center justify-between">
+  <nav class="hidden sm:flex items-center justify-between">
     <div class="internal-links">
       <HeaderLink class={linkStyles} href="/">Home</HeaderLink>
       <HeaderLink class={linkStyles} href="/blog">Blog</HeaderLink>
@@ -21,4 +29,17 @@ const linkStyles = "py-4 px-2 border-b-2 border-b-transparent";
       <ThemeToggle client:load />
     </div>
   </nav>
+
+  <a href="/" class="flex sm:hidden items-center gap-3">
+    <ReceiptText className="size-6 text-orange-500" />
+    <span class="text-xl font-bold">My Boring Blog</span>
+  </a>
+
+  <MobileNav client:load>
+    <nav class="flex flex-col gap-1 pt-2">
+      <HeaderLink class={linkStylesMobile} href="/">Home</HeaderLink>
+      <HeaderLink class={linkStylesMobile} href="/blog">Blog</HeaderLink>
+      <HeaderLink class={linkStylesMobile} href="/about">About</HeaderLink>
+    </nav>
+  </MobileNav>
 </header>
