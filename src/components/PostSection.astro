@@ -1,4 +1,5 @@
 ---
+import Image from "astro/components/Image.astro";
 import PostCard from "./PostCard.astro";
 import type { CollectionEntry } from "astro:content";
 
@@ -7,22 +8,51 @@ interface Props {
 }
 
 const { posts } = Astro.props;
+const mostRecentPost = posts[0];
 ---
 
-<section class="container flex flex-col items-center gap-6 py-24 sm:gap-7">
-  <div class="flex flex-col gap-3">
+<section class="container flex flex-col items-center gap-6 py-12 sm:gap-7">
+  <!-- <div class="flex flex-col gap-3">
     <span class="text-lg font-bold text-orange-500 uppercase text-center">
-      Resent Articles
+      Articles
     </span>
     <h2
       class="text-3xl font-semibold tracking-tight sm:text-4xl text-balance text-center"
     >
       My Boring Blog
     </h2>
-  </div>
-  <p class="text-lg text-muted-foreground text-balance max-w-2xl text-center">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-  </p>
+  </div> -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-bold mb-4 text-orange-500 uppercase">
+      Most Resent
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a href={`/blog/${mostRecentPost.slug}`}>
+        <div>
+          <Image
+            alt="Latest Post"
+            class="w-full h-64 object-cover object-center rounded-lg"
+            height="400"
+            src={mostRecentPost.data.heroImage ?? "404.png"}
+            width="600"
+            loading="eager"
+          />
+        </div>
+      </a>
+      <div class="flex flex-col justify-center">
+        <h3 class="text-xl font-bold mb-2">{mostRecentPost.data.title}</h3>
+        <p class="text-zinc-500 dark:text-zinc-400">
+          {mostRecentPost.data.description}
+        </p>
+        <a
+          class="text-blue-500 hover:text-blue-700 mt-4"
+          href={`/blog/${mostRecentPost.slug}`}
+        >
+          Read More
+        </a>
+      </div>
+    </div>
+  </section>
   <div
     class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 auto-rows-fr"
   >

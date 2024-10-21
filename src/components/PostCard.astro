@@ -2,6 +2,7 @@
 import Image from "astro/components/Image.astro";
 import { Card, CardContent } from "./ui/card";
 import type { CollectionEntry } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -12,31 +13,55 @@ const { description, pubDate, title, heroImage, updatedDate } = post.data;
 ---
 
 <a href={`/blog/${post.slug}`}>
-  <Card className="h-full shadow-lg">
-    <CardContent className="flex h-full flex-col items-start gap-4 p-5">
+  <Card
+    className="card rounded-lg border bg-card text-card-foreground h-full shadow-lg"
+  >
+    <CardContent
+      className="p-6 pt-0 flex h-full flex-col items-start gap-5 px-0"
+    >
       <div class="relative h-52 w-full">
         <Image
-          class="object-cover rounded-lg"
-          src={heroImage ?? "404.png"}
           alt={title}
-          width={1280}
-          height={720}
-          fetchpriority={"high"}
+          decoding="async"
+          class="object-cover rounded-t-lg"
+          src={heroImage ?? "404.png"}
+          width={300}
+          height={200}
         />
       </div>
-      <div class="flex flex-1 flex-col gap-4">
+      <div class="flex flex-1 flex-col gap-2.5 px-5 w-full">
         <h4 class="text-lg font-semibold">{title}</h4>
-        <p class="mb-auto text-muted-foreground">
-          {description.slice(0, 300)}...
+        <p class="text-base text-muted-foreground mb-auto">
+          {description}
         </p>
-        <div class="flex flex-row items-center gap-3">
+        <div
+          class="flex flex-row items-center gap-3 w-full justify-between pr-2"
+        >
           <span
             class="rounded-full border bg-accent px-3 py-0.5 text-sm text-accent-foreground"
             >TYPE
           </span>
-          <span class="text-sm text-muted-foreground">{pubDate}</span>
+          <span class="text-sm text-muted-foreground">
+            <FormattedDate date={pubDate} />
+          </span>
         </div>
       </div>
     </CardContent>
   </Card>
 </a>
+
+<style>
+  .card {
+    transition: transform 0.2s ease-in-out;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .card img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    inset: 0px;
+    color: transparent;
+  }
+</style>
