@@ -1,0 +1,42 @@
+---
+import Image from "astro/components/Image.astro";
+import { Card, CardContent } from "./ui/card";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { description, pubDate, title, heroImage, updatedDate } = post.data;
+---
+
+<a href={`/blog/${post.slug}`}>
+  <Card className="h-full shadow-lg">
+    <CardContent className="flex h-full flex-col items-start gap-4 p-5">
+      <div class="relative h-52 w-full">
+        <Image
+          class="object-cover rounded-lg"
+          src={heroImage ?? "404.png"}
+          alt={title}
+          width={1280}
+          height={720}
+          fetchpriority={"high"}
+        />
+      </div>
+      <div class="flex flex-1 flex-col gap-4">
+        <h4 class="text-lg font-semibold">{title}</h4>
+        <p class="mb-auto text-muted-foreground">
+          {description.slice(0, 300)}...
+        </p>
+        <div class="flex flex-row items-center gap-3">
+          <span
+            class="rounded-full border bg-accent px-3 py-0.5 text-sm text-accent-foreground"
+            >TYPE
+          </span>
+          <span class="text-sm text-muted-foreground">{pubDate}</span>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+</a>
