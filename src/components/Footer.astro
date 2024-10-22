@@ -1,5 +1,10 @@
 ---
-import GithubLink from "./GithubLink.astro";
+import {
+  HoverLinkGitHub,
+  HoverLinkMail,
+  HoverLinkPortfolio,
+  HoverLinkLinkedIn,
+} from "./HoverLink.tsx";
 const today = new Date();
 ---
 
@@ -9,41 +14,10 @@ const today = new Date();
     All rights reserved.
   </small>
   <div class="flex justify-center items-center gap-4 mt-4">
-    <a>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 30 30"
-        width="39"
-        height="39"
-        stroke="#000"
-        ><g stroke-width="0"></g><g
-          stroke-linecap="round"
-          stroke-linejoin="round"></g><path
-          style="opacity:1;fill:#000;fill-opacity:1;stroke:none;stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:.7716895"
-          d="M15 3A12 12 0 0 0 3 15a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 15 3m1.8 6 1.48.691-.473.98 6.048 3.735v1.381l-4.728 2.934-.86-1.309 3.926-2.314-5.078-2.971L12.835 21l-1.49-.68.485-1.006-5.685-3.527v-1.369l4.74-2.945.847 1.32-3.939 2.305 4.728 2.775z"
-          stroke="none"></path><g
-          aria-label="</>"
-          style="font-style:normal;font-weight:400;font-size:12.12121201px;line-height:1.25;font-family:sans-serif;letter-spacing:0;word-spacing:0;fill:#000;fill-opacity:1;stroke:none;stroke-width:.99999994"
-          transform="translate(-1.026 -289.063)"></g></svg
-      >
-    </a>
-    <a>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="32"
-        height="32"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="lucide lucide-mail"
-        ><rect width="20" height="16" x="2" y="4" rx="2"></rect><path
-          d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg
-      >
-    </a>
-    <GithubLink className="block" />
+    <HoverLinkGitHub client:visible />
+    <HoverLinkMail client:visible />
+    <HoverLinkPortfolio client:visible />
+    <HoverLinkLinkedIn client:visible />
   </div>
 </footer>
 

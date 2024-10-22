@@ -3,12 +3,16 @@ import HeaderLink from "./HeaderLink.astro";
 import { ThemeToggle } from "./ui/theme-toggle";
 import GithubLink from "./GithubLink.astro";
 import MobileNav from "./MobileNav";
-import { ReceiptText } from "lucide-react";
+import { Home, ReceiptText } from "lucide-react";
+import { HoverLinkPortfolio } from "./HoverLink";
 
 const linkStyles =
   "py-4 px-2 border-b-2 border-b-transparent transition-colors hover:text-orange-500";
 const linkStylesMobile =
   "flex w-full cursor-pointer items-center rounded-md p-2 font-medium text-accent-foreground hover:text-orange-500";
+const { pathname } = Astro.url;
+const subpath = pathname.match(/[^\/]+/g);
+const isActive = "/" === pathname;
 ---
 
 <header
@@ -18,14 +22,22 @@ const linkStylesMobile =
   ]}
 >
   <nav class="hidden sm:flex items-center justify-between">
-    <div class="internal-links">
-      <HeaderLink class={linkStyles} href="/">Home</HeaderLink>
-      <HeaderLink class={linkStyles} href="/blog">Blog</HeaderLink>
+    <div class="flex items-center">
+      <HeaderLink class={linkStyles} href="/" aria-label="Home icon">
+        {
+          isActive ? (
+            <Home className="size-6 text-orange-500" />
+          ) : (
+            <Home className="size-6" />
+          )
+        }
+      </HeaderLink>
+      <HeaderLink class={linkStyles} href="/gallery">Gallery</HeaderLink>
       <HeaderLink class={linkStyles} href="/about">About</HeaderLink>
     </div>
 
     <div class="flex flex-row items-center gap-4">
-      <GithubLink />
+      <HoverLinkPortfolio client:load />
       <ThemeToggle client:load />
     </div>
   </nav>
