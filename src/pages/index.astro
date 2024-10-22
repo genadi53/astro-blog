@@ -2,16 +2,22 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import PostSection from "@/components/PostSection.astro";
 import Layout from "@/layouts/Main.astro";
+import IntroSection from "@/components/Intro";
 
 type BlogPost = CollectionEntry<"blog">;
 
-const posts = (await getCollection("blog")).sort(
-  (a: BlogPost, b: BlogPost) =>
-    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection("blog"))
+  .sort(
+    (a: BlogPost, b: BlogPost) =>
+      b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  )
+  .slice(0, 6);
 ---
 
 <Layout>
+  <div class="max-w-5xl mx-auto">
+    <IntroSection client:load />
+  </div>
   <div class="max-w-5xl mx-auto">
     <PostSection posts={posts} />
   </div>

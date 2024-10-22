@@ -6,8 +6,11 @@ import { GITHUB_PROFILE, LINKEDIN_PROFILE, PORTFOLIO_ADDRESS } from "@/consts";
 
 export function HoverLinkPortfolio() {
   return (
-    <HoverCard>
-      <HoverCardTrigger href={PORTFOLIO_ADDRESS}>
+    <HoverCard openDelay={250} closeDelay={250}>
+      <HoverCardTrigger
+        className="hover:text-orange-500"
+        href={PORTFOLIO_ADDRESS}
+      >
         <span className="sr-only">My Website</span>
         <CircleUser className="size-6" />
       </HoverCardTrigger>
@@ -20,8 +23,8 @@ export function HoverLinkPortfolio() {
 
 export function HoverLinkGitHub() {
   return (
-    <HoverCard>
-      <HoverCardTrigger href={GITHUB_PROFILE}>
+    <HoverCard openDelay={250} closeDelay={250}>
+      <HoverCardTrigger className="hover:text-orange-500" href={GITHUB_PROFILE}>
         <>
           <span className="sr-only">My GitHub profile</span>
           <GitHubLogoIcon className="size-6" aria-hidden />
@@ -36,8 +39,11 @@ export function HoverLinkGitHub() {
 
 export function HoverLinkMail() {
   return (
-    <HoverCard>
-      <HoverCardTrigger href="mailto:genadi.tsolov@gmail.com">
+    <HoverCard openDelay={250} closeDelay={250}>
+      <HoverCardTrigger
+        className="hover:text-orange-500"
+        href="mailto:genadi.tsolov@gmail.com"
+      >
         <>
           <span className="sr-only">Send me an email</span>
           <Mail className="size-6" />
@@ -52,8 +58,11 @@ export function HoverLinkMail() {
 
 export function HoverLinkLinkedIn() {
   return (
-    <HoverCard>
-      <HoverCardTrigger href={LINKEDIN_PROFILE}>
+    <HoverCard openDelay={250} closeDelay={250}>
+      <HoverCardTrigger
+        className="hover:text-orange-500"
+        href={LINKEDIN_PROFILE}
+      >
         <>
           <span className="sr-only">Linkedin Profile</span>
           <LinkedInLogoIcon className="size-6" aria-hidden />
