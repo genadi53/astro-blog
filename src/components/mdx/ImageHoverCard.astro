@@ -1,0 +1,31 @@
+---
+import Image from "astro/components/Image.astro";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+
+interface Props {
+  image: string;
+}
+
+const { image } = Astro.props;
+---
+
+<HoverCard>
+  <HoverCardTrigger>
+    <slot />
+  </HoverCardTrigger>
+  <HoverCardContent>
+    <div class="relative w-full h-full">
+      <Image
+        width={320}
+        height={240}
+        src={image}
+        alt="Image"
+        class="object-cover object-center rounded-lg justify-self-center"
+      />
+    </div>
+  </HoverCardContent>
+</HoverCard>

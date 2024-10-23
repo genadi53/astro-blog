@@ -1,0 +1,48 @@
+---
+import Image from "astro/components/Image.astro";
+
+interface Props {
+  images: string[];
+}
+const { images } = Astro.props;
+const columnCount = Math.min(images.length, 3);
+---
+
+<!-- <div class="grid" style={`--columns: ${columnCount}`}>
+  {images.map((image) => <img src={image} alt="Image" />)}
+</div> -->
+<div
+  class:list={[
+    "relative grid grid-cols-1 sm:grid-cols-2 gap-4 w-full h-full mx-auto py-4",
+    "grid-num-cols",
+  ]}
+  style={`--columns: ${columnCount}`}
+>
+  {
+    images.map((img) => {
+      return (
+        <div class="relative w-full h-full">
+          <Image
+            width={320}
+            height={240}
+            src={img}
+            alt="Image"
+            class="object-cover object-center rounded-lg justify-self-center"
+          />
+        </div>
+      );
+    })
+  }
+</div>
+<style>
+  .grid-num-cols {
+    grid-template-columns: repeat(var(--columns, 1), 1fr);
+  }
+
+  /* .grid img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+  } */
+</style>
