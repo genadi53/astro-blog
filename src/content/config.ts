@@ -7,6 +7,8 @@ const blogSchema = z.object({
   pubDate: z.coerce.date(),
   updatedDate: z.coerce.date().optional(),
   heroImage: z.string().optional(),
+  tag: z.string().optional(),
+  author: z.string().optional().default("Genadi Tsolov"),
 });
 
 const blog = defineCollection({

@@ -9,7 +9,8 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { description, pubDate, title, heroImage, updatedDate } = post.data;
+const { description, pubDate, title, heroImage, updatedDate, tag, author } =
+  post.data;
 ---
 
 <a href={`/blog/${post.slug}`}>
@@ -38,8 +39,8 @@ const { description, pubDate, title, heroImage, updatedDate } = post.data;
           class="flex flex-row items-center gap-3 w-full justify-between pr-2"
         >
           <span
-            class="rounded-full border bg-accent px-3 py-0.5 text-sm text-accent-foreground"
-            >TYPE
+            class="uppercase rounded-full border bg-orange-300 px-3 py-0.5 text-sm text-accent-foreground"
+            >{tag}
           </span>
           <span class="text-sm text-muted-foreground">
             <FormattedDate date={pubDate} />
