@@ -33,19 +33,11 @@ export default function IntroSection() {
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
-          <div
-            // initial={{ opacity: 0, scale: 0.8 }}
-            // animate={{ opacity: 1, scale: 1 }}
-            // transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative h-[400px] sm:h-[500px] rounded-lg overflow-hidden shadow-2xl"
-          >
+          <div className="relative h-[400px] rounded-lg bg-transparent overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2787&q=80"
+              src="/typewriter.png"
               alt="Stack of books"
               className="object-cover w-full h-full"
-              //   initial={{ scale: 1.2 }}
-              //   animate={{ scale: 1 }}
-              //   transition={{ duration: 10, ease: "easeOut" }}
             />
           </div>
         </div>
