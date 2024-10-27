@@ -3,6 +3,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { cn } from "@/lib/cn";
 import type { PropsWithChildren } from "react";
 
 interface Props {
@@ -19,14 +20,16 @@ export default function ImageHoverCard({
 }: PropsWithChildren<Props>) {
   return (
     <HoverCard>
-      <HoverCardTrigger className={stylesTrigger}>{children}</HoverCardTrigger>
-      <HoverCardContent className={stylesContent}>
+      <HoverCardTrigger className={cn(stylesTrigger)}>
+        {children}
+      </HoverCardTrigger>
+      <HoverCardContent className={cn("py-0", stylesContent)}>
         <div className="relative w-full h-full">
           <img
             width={320}
             height={240}
             src={image}
-            alt="Image"
+            alt="hover card"
             className="object-cover object-center rounded-lg justify-self-center"
           />
         </div>

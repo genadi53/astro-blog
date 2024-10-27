@@ -30,7 +30,7 @@ export default function IntroSection() {
               }}
             >
               Start Reading
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-[2px] h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
           <div className="relative h-[400px] rounded-lg bg-transparent overflow-hidden">
