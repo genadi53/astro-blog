@@ -1,0 +1,23 @@
+---
+import type { MarkdownInstance } from "astro";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<blockquote
+  class:list={[
+    "flex flex-col border-l-4 border-orange-500 pl-4 text-accent-foreground ",
+    className,
+  ]}
+>
+  <i>
+    <slot name="quote" />
+  </i>
+  <div class="self-end mr-2 font-semibold">
+    <slot name="author" />
+  </div>
+</blockquote>
