@@ -1,0 +1,54 @@
+---
+import { slugify } from "@/lib/slugify";
+import type {
+  InferGetStaticParamsType,
+  InferGetStaticPropsType,
+  GetStaticPaths,
+} from "astro";
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Main.astro";
+import TagList from "@/components/TagList.astro";
+import PostListing from "@/components/PostListing.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const tags: string[] = [];
+  posts.forEach((post) => {
+    if (post.data.tag) {
+      tags.push(post.data.tag);
+    }
+  });
+
+  return tags.map((tag) => {
+    return {
+      params: { category: slugify(tag) },
+      props: {
+        tag: tag,
+        posts: posts.filter((post) => {
+          return post.data.tag === tag;
+        }),
+      },
+    };
+  });
+}
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { tag, posts } = Astro.props as Props;
+---
+
+<Layout>
+  <div class="max-w-5xl mx-auto py-4 px-6 md:py-8 md:px-0">
+    <h1 class="text-2xl font-bold text-orange-500 uppercase mb-4">
+      Posts about <span class="text-blue-500">
+        {tag}
+      </span>
+    </h1>
+
+    <div class="flex w-full flex-col gap-12">
+      <PostListing posts={posts} />
+      <TagList showCount={true} />
+    </div>
+  </div>
+</Layout>

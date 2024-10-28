@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import { Badge } from "@/components/ui/badge";
+import { slugify } from "@/lib/slugify";
+
+type TagCount = {
+  [key: string]: number;
+};
+
+const posts = await getCollection("blog");
+const tags: string[] = [];
+posts.forEach((post) => {
+  if (post.data.tag) {
+    tags.push(post.data.tag.toUpperCase());
+  }
+});
+
+const tagCounts = tags.reduce((acc, tag) => {
+  const value = acc[tag] || 0;
+  return {
+    ...acc,
+    [tag]: value + 1,
+  };
+}, {} as TagCount);
+
+const { showCount } = Astro.props;
+---
+
+<div
+  class="flex flex-row items-center justify-center gap-4 flex-wrap max-w-lg mx-auto"
+>
+  {
+    Object.entries(tagCounts).map(([key, val]) => (
+      <Badge>
+        <a class="badge" href={`/blog/category/${slugify(key)}/`}>
+          {key} {showCount && `(${val})`}
+        </a>
+      </Badge>
+    ))
+  }
+</div>
