@@ -9,15 +9,11 @@ import { getCollection } from "astro:content";
 import Layout from "@/layouts/Main.astro";
 import TagList from "@/components/TagList.astro";
 import PostListing from "@/components/PostListing.astro";
+import { getTags } from "@/lib/postUtils";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
-  const tags: string[] = [];
-  posts.forEach((post) => {
-    if (post.data.tag) {
-      tags.push(post.data.tag);
-    }
-  });
+  const tags: string[] = getTags(posts);
 
   return tags.map((tag) => {
     return {
@@ -40,8 +36,8 @@ const { tag, posts } = Astro.props as Props;
 
 <Layout>
   <div class="max-w-5xl mx-auto py-4 px-6 md:py-8 md:px-0">
-    <h1 class="text-2xl font-bold text-orange-500 uppercase mb-4">
-      Posts about <span class="text-blue-500">
+    <h1 class="text-2xl font-bold text-secondary-foreground uppercase mb-4">
+      Posts about <span class="text-orange-500">
         {tag}
       </span>
     </h1>

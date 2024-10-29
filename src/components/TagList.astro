@@ -2,26 +2,11 @@
 import { getCollection } from "astro:content";
 import { Badge } from "@/components/ui/badge";
 import { slugify } from "@/lib/slugify";
-
-type TagCount = {
-  [key: string]: number;
-};
+import { getTags, getPostPerTagCount } from "@/lib/postUtils";
 
 const posts = await getCollection("blog");
-const tags: string[] = [];
-posts.forEach((post) => {
-  if (post.data.tag) {
-    tags.push(post.data.tag.toUpperCase());
-  }
-});
-
-const tagCounts = tags.reduce((acc, tag) => {
-  const value = acc[tag] || 0;
-  return {
-    ...acc,
-    [tag]: value + 1,
-  };
-}, {} as TagCount);
+const tags: string[] = getTags(posts);
+const tagCounts = getPostPerTagCount(tags);
 
 const { showCount } = Astro.props;
 ---

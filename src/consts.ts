@@ -7,3 +7,5 @@ export const GITHUB_PROFILE = "https://github.cm/genadi53";
 export const LINKEDIN_PROFILE =
   "https://www.linkedin.com/in/genadi-ts%D0%BEl%D0%BEv/";
 export const PORTFOLIO_ADDRESS = "https://genadi-tsolov.vercel.app";
+export const POST_HOMEPAGE_LIMIT = 6;
+export const DEFAULT_PAGE_LIMIT = 12;
