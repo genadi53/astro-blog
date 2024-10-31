@@ -18,4 +18,11 @@ const blog = defineCollection({
 
 export type BlogPost = z.infer<typeof blogSchema>;
 
-export const collections = { blog };
+const gallery = defineCollection({
+  type: "data",
+  schema: z.object({
+    images: z.array(z.string()),
+  }),
+});
+
+export const collections = { blog, gallery };
